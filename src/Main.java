@@ -6,17 +6,15 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ArrayList<ArrayList<String>> sayList = new ArrayList<>();
+        String cmd = "";
 
         System.out.println("== 명언 앱 ==");
-        
-        while(true){
-            System.out.print("명령) ");
-            String str=sc.nextLine();
 
-            if(str.equals("종료")){
-                break;
-            }
-            else if(str.equals("등록")){
+        while(!cmd.equals("종료")){
+            System.out.print("명령) ");
+            cmd=sc.nextLine();
+
+            if(cmd.equals("등록")){
                 System.out.print("명언: ");
                 String saying=sc.nextLine();
 
@@ -28,7 +26,7 @@ public class Main {
 
                 System.out.println(num+"번 명언이 등록되었습니다.");
             }
-            else if(str.equals("목록")) {
+            else if(cmd.equals("목록")) {
                 System.out.println("번호 / 작가 / 명언");
                 System.out.println("----------------------");
 
@@ -41,8 +39,8 @@ public class Main {
                     System.out.println(i+1 + " / "+ author + " / " + saying);
                 }
             }
-            else if(str.contains("삭제?id=")) {
-                int idx=Integer.parseInt(str.substring(6))-1;
+            else if(cmd.contains("삭제?id=")) {
+                int idx=Integer.parseInt(cmd.substring(6))-1;
 
                 if(idx < sayList.size() && !sayList.get(idx).get(0).isEmpty()){
                     sayList.get(idx).set(0,"");
@@ -53,8 +51,8 @@ public class Main {
                     System.out.println(idx+1 + "번 명언은 존재하지 않습니다.");
                 }
             }
-            else if(str.contains("수정?id=")) {
-                int idx=Integer.parseInt(str.substring(6))-1;
+            else if(cmd.contains("수정?id=")) {
+                int idx=Integer.parseInt(cmd.substring(6))-1;
 
                 if(idx < sayList.size() && !sayList.get(idx).get(0).isEmpty()){
                     String saying = sayList.get(idx).get(0);
