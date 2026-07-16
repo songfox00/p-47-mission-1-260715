@@ -7,6 +7,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         ArrayList<ArrayList<String>> sayList = new ArrayList<>();
 
+        System.out.println("== 명언 앱 ==");
+        
         while(true){
             System.out.print("명령) ");
             String str=sc.nextLine();
