@@ -41,4 +41,16 @@ public class Rq {
         return paramMap.getOrDefault(key,defaultValue);
 
     }
+
+    public int getParamAsInt(String key, int defaultValue){
+
+        String rst = getParam(key,"");
+
+        try{
+            return Integer.parseInt(rst);
+        } catch (NumberFormatException e){
+            return defaultValue;
+
+        }
+    }
 }
