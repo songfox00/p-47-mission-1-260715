@@ -1,12 +1,12 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
 
     Scanner sc = new Scanner(System.in);
-    WiseSaying[] wiseSayings= new WiseSaying[10];
+    ArrayList<WiseSaying> wiseSayings= new ArrayList<>();
     String cmd = "";
     int lastId = 0; // 가장 최근 생성된 명언 번호
-    int lastIndex = 0; //가장 최근 생성된 배열 인덱스
 
     public void run(){
         System.out.println("== 명언 앱 ==");
@@ -32,8 +32,8 @@ public class App {
         System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        for (int i = lastIndex-1; i >= 0; i--) {
-            WiseSaying target=wiseSayings[i];
+        for (int i = wiseSayings.size()-1; i >= 0; i--) {
+            WiseSaying target=wiseSayings.get(i);
 
             if (target.getContent().isEmpty())
                 continue;
@@ -44,7 +44,7 @@ public class App {
 
     private WiseSaying write(String content, String author){
         WiseSaying wiseSaying=new WiseSaying(++lastId, author, content);
-        wiseSayings[lastIndex++]=wiseSaying;
+        wiseSayings.add(wiseSaying);
 
         return wiseSaying;
     }
@@ -56,7 +56,7 @@ public class App {
         System.out.print("작가: ");
         String author = sc.nextLine();
 
-        WiseSaying wiseSaying= write(content, author);
+        WiseSaying wiseSaying = write(content, author);
 
         System.out.println("%d번 명언이 등록되었습니다.".formatted(wiseSaying.getId()));
     }
@@ -66,8 +66,9 @@ public class App {
         int id = Integer.parseInt(cmd.substring(cmd.indexOf("=")+1).trim());
         int targetIdx=-1;
 
-        for(int i=0;i<lastIndex;i++){
-            WiseSaying w1=wiseSayings[i];
+
+        for(int i=0;i<wiseSayings.size();i++){
+            WiseSaying w1=wiseSayings.get(i);
             if(w1.getId() == id)
                 targetIdx=i;
         }
@@ -77,21 +78,17 @@ public class App {
             return;
         }
 
-        for(int i=targetIdx;i<lastId;i++){
-            wiseSayings[i]=wiseSayings[i + 1];
-        }
+        wiseSayings.remove(targetIdx);
 
         System.out.println("%d번 명언이 삭제되었습니다.".formatted(id));
-
-        lastIndex--;
     }
 
     private void actionModify(String cmd) {
         int id = Integer.parseInt(cmd.substring(cmd.indexOf("=")+1).trim());
         int targetIdx=-1;
 
-        for(int i=0;i<lastIndex;i++){
-            WiseSaying w1=wiseSayings[i];
+        for(int i=0;i<wiseSayings.size();i++){
+            WiseSaying w1=wiseSayings.get(i);
             if(w1.getId() == id)
                 targetIdx=i;
         }
@@ -101,7 +98,7 @@ public class App {
             return;
         }
 
-        WiseSaying w1 = wiseSayings[targetIdx];
+        WiseSaying w1 = wiseSayings.get(targetIdx);
 
         System.out.println("명언(기존) : %s" .formatted(w1.getContent()));
         System.out.print("명언 : ");
