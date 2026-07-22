@@ -1,14 +1,11 @@
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
 public class WiseSayingController {
 
-    Scanner sc = new Scanner(System.in);
-    WiseSayingService wiseSayingService = new WiseSayingService();
-
-    public WiseSayingController(Scanner sc){
-        this.sc = sc;
-    }
+    Scanner sc = AppContext.sc;
+    WiseSayingService wiseSayingService = AppContext.wiseSayingService;
 
     public void actionList(){
 
@@ -21,8 +18,9 @@ public class WiseSayingController {
             System.out.println("%d / %s / %s / %s / %s".formatted(target.getId(),
                     target.getAuthor(),
                     target.getContent(),
-                    target.getCreatedDate(),
-                    target.getModifiedDate()));
+                    target.getCreatedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm")),
+                    target.getModifiedDate().format(DateTimeFormatter.ofPattern("yy/MM/dd HH:mm"))
+            ));
         }
     }
 

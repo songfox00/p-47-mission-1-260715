@@ -4,7 +4,7 @@ public class App {
 
     Scanner sc = new Scanner(System.in);
     String cmd = "";
-    WiseSayingController wiseSayingController = new WiseSayingController(sc);
+    WiseSayingController wiseSayingController = AppContext.wiseSayingController;
 
     public void run(){
         System.out.println("== 명언 앱 ==");

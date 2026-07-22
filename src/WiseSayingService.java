@@ -2,7 +2,7 @@ import java.util.List;
 
 public class WiseSayingService {
 
-    WiseSayingRepository wiseSayingRepository= new WiseSayingRepository();
+    WiseSayingRepository wiseSayingRepository= AppContext.wiseSayingRepository;
 
     public WiseSaying findById(int id) {
         return wiseSayingRepository.findById(id);
